@@ -1,0 +1,42 @@
+body {
+    background: linear-gradient(
+        180deg,
+        #f8f4f1,
+        #e7ddd4
+    );
+}
+
+body.dark-mode {
+    background: linear-gradient(
+        180deg,
+        #1e0563,
+        #1f2937,
+        #111827
+    );
+}
+
+body.dark-mode .card {
+    background-color: #374151;
+    color: white;
+}
+
+body.dark-mode .card-header {
+    background-color: #111827 !important;
+}
+
+body.dark-mode .form-label,
+body.dark-mode .text-muted {
+    color: #d1d5db !important;
+}
+
+body.dark-mode {
+    color: white;
+}
+
+.form-check-input {
+    cursor: pointer;
+}
+
+.form-check-label {
+    cursor: pointer;
+}
