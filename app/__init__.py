@@ -1,0 +1,1 @@
+"""Workshop FastAPI + Ollama."""

@@ -21,11 +21,12 @@
                 <div class="card"> <!-- card pour une fenêtre avec bordure -->
                     <div class="card-header bg-secondary text-white d-flex justify-content-between align-items-center"> <!-- card-header pour l'en-tête de la fenêtre -->
                         <div>
-                            <b>Compresse ton code !</b>
+                            <b>Commente ton code !</b>
                         </div>
                     </div>
                     <div class="card-body"> <!-- card-body pour le corps de la fenêtre -->
                         <textarea
+                            id="code-input"
                             class="form-control"
                             rows="10"
                             placeholder="Your code..."
@@ -33,14 +34,15 @@
                                 
                         <div class="d-flex justify-content-between align-items-center mt-2"> <!-- d-flex pour display flex, justify-content-between pour espacer les éléments, align-items-center pour aligner verticalement au centre, mt-2 pour margin top -->
                             <div class="text-end">
-                                <button class="btn btn-success mt-2" type="submit"> Compresse <i class="bi bi-send"></i></button> <!-- btn-success pour un bouton vert, bi bi-send pour l'icône d'envoi, bi = bootstrap icons -->
+                                <button id="submit-btn" class="btn btn-success mt-2" type="submit"> Commenter <i class="bi bi-send"></i></button> <!-- btn-success pour un bouton vert, bi bi-send pour l'icône d'envoi, bi = bootstrap icons -->
                             </div>
                         </div>
                     </div>
-                </div> 
+                </div>
                 <div class="card mt-3"> <!-- card pour une fenêtre avec bordure -->
                     <div class="card-footer text-muted"> <!-- card-footer pour le pied de page de la fenêtre, text-muted pour une écriture grise -->
                         <textarea
+                            id="result-output"
                             class="form-control mt-3"
                             rows="10"
                             placeholder="Result..."
@@ -58,5 +60,11 @@
         </main>
         <script src="js/layout.js"></script>
         <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.8/dist/js/bootstrap.bundle.min.js"></script>
+        <script src="js/api.js"></script>
+        <script>
+        document.getElementById("submit-btn").addEventListener("click", () => {
+            callCodeScribe("comment");
+        });
+        </script>
     </body>
 </html>
