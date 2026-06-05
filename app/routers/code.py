@@ -12,8 +12,7 @@ async def comment_code(payload: CodeRequest):
         raise HTTPException(status_code=400, detail="Le code ne peut pas être vide.")
 
     result = await get_code_assistant_service().comment_code(
-        payload.code,
-        payload.language
+        payload.code
     )
 
     return CodeResponse(action="comment", result=result)
@@ -22,8 +21,7 @@ async def comment_code(payload: CodeRequest):
 @router.post("/control", response_model=CodeResponse)
 async def control_code(payload: CodeRequest):
     result = await get_code_assistant_service().control_code(
-        payload.code,
-        payload.language
+        payload.code
     )
 
     return CodeResponse(action="control", result=result)
@@ -32,8 +30,7 @@ async def control_code(payload: CodeRequest):
 @router.post("/compress", response_model=CodeResponse)
 async def compress_code(payload: CodeRequest):
     result = await get_code_assistant_service().compress_code(
-        payload.code,
-        payload.language
+        payload.code
     )
 
     return CodeResponse(action="compress", result=result)

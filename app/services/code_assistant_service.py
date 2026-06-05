@@ -21,7 +21,7 @@ class CodeAssistantService:
 
         return response.strip()
 
-    async def comment_code(self, code: str, language: str) -> str:
+    async def comment_code(self, code: str) -> str:
         system_prompt = """
             Tu es CodeScribe, un assistant expert en programmation.
 
@@ -43,55 +43,60 @@ class CodeAssistantService:
         """
 
         user_prompt = f"""
-        Langage : {language}
+            Analyse le code suivant.
 
-        Commente chaque ligne du code suivant.
-        Retourne uniquement le code commenté.
+            1. Détecte automatiquement le langage utilisé.
+            2. Ajoute des commentaires adaptés à ce langage.
+            3. Les commentaires doivent être en français.
+            4. Retourne uniquement le code commenté.
+            5. N'utilise jamais de markdown.
+            6. N'utilise jamais ```.
 
-        Code :
-        {code}
+            Code :
+            {code}
         """
 
         # Appel à l'API Ollama pour obtenir la réponse (await nécessaire pour les appels asynchrones)
         response = await self.ollama_service.chat(system_prompt, user_prompt)
         return self._clean_code_response(response)
 
-    async def control_code(self, code: str, language: str) -> str:
+    async def control_code(self, code: str) -> str:
         system_prompt = (
             "Tu es CodeScribe, un expert en revue de code. "
             "Tu détectes les erreurs et proposes des corrections."
         )
 
         user_prompt = f"""
-        Langage : {language}
+            Analyse le code suivant.
 
-        Analyse le code suivant.
-        Indique :
-        1. Si le code est correct
-        2. Les erreurs éventuelles
-        3. Une version corrigée si nécessaire
+            1. Détecte automatiquement le langage.
+            2. Vérifie la syntaxe et la logique.
+            3. Signale les erreurs éventuelles.
+            4. Propose une correction si nécessaire.
 
-        Code :
-        {code}
+            Code :
+            {code}
         """
 
         return await self.ollama_service.chat(system_prompt, user_prompt)
 
-    async def compress_code(self, code: str, language: str) -> str:
+    async def compress_code(self, code: str) -> str:
         system_prompt = (
             "Tu es CodeScribe, un assistant qui optimise le code. "
             "Tu réduis le nombre de lignes sans changer le comportement."
         )
 
         user_prompt = f"""
-        Langage : {language}
+            Analyse le code suivant.
 
-        Compresse le code suivant.
-        Garde le même comportement.
-        Retourne uniquement le code optimisé.
+            1. Détecte automatiquement le langage.
+            2. Optimise et réduit le nombre de lignes.
+            3. Conserve exactement le même comportement.
+            4. Retourne uniquement le code optimisé.
+            5. N'utilise jamais de markdown.
 
-        Code :
-        {code}
+            Code :
+            {code}
         """
 
         response = await self.ollama_service.chat(system_prompt, user_prompt)
