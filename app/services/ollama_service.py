@@ -53,6 +53,9 @@ class OllamaService:
                 {"role": "system", "content": system_prompt},
                 {"role": "user", "content": user_prompt},
             ],
+            "options": {
+                "temperature": 0.1 # ajuste la créativité de la réponse
+            }
         }
 
         try:
