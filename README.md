@@ -78,6 +78,112 @@ CodeScribe/
 
 ---
 
+## Architecture du projet avec détails
+
+```text
+CodeScribe/
+│
+├── app/
+│   │
+│   ├── main.py
+│   │   └── Point d'entrée de l'application FastAPI.
+│   │
+│   ├── core/
+│   │   ├── config.py
+│   │   │   └── Gestion de la configuration de l'application.
+│   │   │
+│   │   ├── dependencies.py
+│   │   │   └── Déclaration et injection des dépendances.
+│   │   │
+│   │   └── factory.py
+│   │       └── Création et initialisation des services métier.
+│   │
+│   ├── routers/
+│   │   ├── code.py
+│   │   │   └── Endpoints API pour commenter, contrôler et compresser du code.
+│   │   │
+│   │   └── health.py
+│   │       └── Endpoint de vérification de disponibilité de l'API.
+│   │
+│   ├── schemas/
+│   │   └── code.py
+│   │       └── Modèles Pydantic utilisés par les requêtes API.
+│   │
+│   └── services/
+│       ├── code_assistant_service.py
+│       │   └── Construction des prompts et logique métier.
+│       │
+│       └── ollama_service.py
+│           └── Communication avec Ollama et exécution des requêtes LLM.
+│
+├── frontend/
+│   │
+│   ├── index.html
+│   │   └── Page de commentaire automatique du code.
+│   │
+│   ├── control.html
+│   │   └── Page d'analyse et de contrôle qualité du code.
+│   │
+│   ├── compress.html
+│   │   └── Page de compression et d'optimisation du code.
+│   │
+│   ├── settings.html
+│   │   └── Paramétrage des préférences utilisateur.
+│   │
+│   ├── privacy.html
+│   │   └── Politique de confidentialité de l'application.
+│   │
+│   ├── css/
+│   │   └── style.css
+│   │       └── Feuille de style principale de l'interface.
+│   │
+│   ├── js/
+│   │   ├── api.js
+│   │   │   └── Gestion des appels API vers le backend.
+│   │   │
+│   │   ├── layout.js
+│   │   │   └── Gestion du menu de navigation et des composants communs.
+│   │   │
+│   │   └── settings.js
+│   │       └── Sauvegarde et chargement des préférences utilisateur.
+│   │
+│   └── img/
+│       ├── logo.png
+│       │   └── Logo principal de CodeScribe.
+│       │
+│       └── mini_logo.png
+│           └── Icône utilisée dans l'interface.
+│
+├── data/
+│   └── history.json
+│       └── Stockage local de l'historique des opérations.
+│
+├── Dockerfile
+│   └── Construction de l'image Docker du backend.
+│
+├── compose.yaml
+│   └── Orchestration des conteneurs Docker (API et Ollama).
+│
+├── requirements.txt
+│   └── Liste des dépendances Python du projet.
+│
+├── README.md
+│   └── Documentation du projet.
+│
+├── LICENSE
+│   └── Licence du projet.
+│
+├── .env
+│   └── Variables d'environnement de l'application.
+│
+├── .dockerignore
+│   └── Fichiers exclus du contexte de build Docker.
+│
+└── .gitignore
+    └── Fichiers ignorés par Git.
+```
+
+
 ## Technologies utilisées
 
 ### Backend
