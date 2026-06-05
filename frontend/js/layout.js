@@ -57,7 +57,9 @@ document.body.insertAdjacentHTML("beforeend", `
 `);
 
 // Récupérer le nom de la page actuelle en utilisant window.location.pathname et split pour obtenir le dernier segment de l'URL
-const currentPage = window.location.pathname.split("/").pop();
+const currentPage = window.location.pathname === "/" 
+    ? "index.html" 
+    : window.location.pathname.split("/").pop();
 document.querySelectorAll(".nav-link").forEach(link => { // Sélectionner tous les éléments avec la classe "nav-link" et itérer dessus pour vérifier si leur href correspond à la page actuelle
 
     const linkPage = link.getAttribute("href");

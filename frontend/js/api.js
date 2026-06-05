@@ -5,6 +5,7 @@ async function callCodeScribe(endpoint) {
     output.value = "Chargement...";
 
     try {
+        console.log("commentSize envoyé =", localStorage.getItem("commentSize"));
         const response = await fetch(`/api/${endpoint}`, {
             method: "POST",
             headers: {
@@ -12,7 +13,8 @@ async function callCodeScribe(endpoint) {
             },
             body: JSON.stringify({
                 code: input.value,
-                language: "python"
+                comment_level: localStorage.getItem("commentLevel") || "2",
+                max_comment_length: parseInt(localStorage.getItem("commentSize"), 10)
             })
         });
 

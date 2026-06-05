@@ -12,7 +12,9 @@ async def comment_code(payload: CodeRequest):
         raise HTTPException(status_code=400, detail="Le code ne peut pas être vide.")
 
     result = await get_code_assistant_service().comment_code(
-        payload.code
+        payload.code,
+        payload.comment_level,
+        payload.max_comment_length
     )
 
     return CodeResponse(action="comment", result=result)

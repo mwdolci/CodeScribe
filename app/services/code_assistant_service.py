@@ -21,7 +21,7 @@ class CodeAssistantService:
 
         return response.strip()
 
-    async def comment_code(self, code: str) -> str:
+    async def comment_code(self, code: str, comment_level: str, max_comment_length: int) -> str:
         system_prompt = """
             Tu es CodeScribe, un assistant expert en programmation.
 
@@ -52,9 +52,18 @@ class CodeAssistantService:
             5. N'utilise jamais de markdown.
             6. N'utilise jamais ```.
 
+            Niveau de détail demandé (1=bref, 2=normal, 3=détaillé) :
+            {comment_level}
+
+            Chaque commentaire individuel doit contenir au maximum {max_comment_length} caractères.
+
             Code :
             {code}
         """
+
+        # Pour debug. Contrôle si prompt tient compte des settings du frontend.
+        print("Prompt envoyé à Ollama :")
+        print(user_prompt)
 
         # Appel à l'API Ollama pour obtenir la réponse (await nécessaire pour les appels asynchrones)
         response = await self.ollama_service.chat(system_prompt, user_prompt)

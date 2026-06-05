@@ -3,9 +3,12 @@
 from pydantic import BaseModel, Field
 
 
-# Schéma pour la requête de code, incluant le code lui-même et le langage de programmation.
+# Schéma pour la requête de code, incluant le code lui-même et les paramètre de configuration du frontend
 class CodeRequest(BaseModel):
     code: str = Field(..., min_length=1, description="Code envoyé par l'utilisateur")
+
+    comment_level: str = "normal"
+    max_comment_length: int = 120
 
 
 # Schéma pour la réponse du code, incluant l'action effectuée et le résultat de l'exécution du code.

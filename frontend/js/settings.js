@@ -58,7 +58,9 @@ const savedSize = localStorage.getItem("commentSize"); // Charger la valeur sauv
 if (savedSize) {
     commentSize.value = savedSize;
     commentSizeValue.innerText = savedSize;
-    }
+} else {
+    localStorage.setItem("commentSize", commentSize.value);
+}
 
 // Mise à jour en direct
 commentSize.addEventListener("input", () => {

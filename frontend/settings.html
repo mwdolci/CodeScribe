@@ -59,7 +59,7 @@
                                     max="3"
                                     value="2"
                                     id="commentLevel"
-                                    oninput="updateCommentLabel(this.value)"
+                                    oninput="updateCommentLabel(this.value); localStorage.setItem('commentLevel', this.value)"
                                 >
                             </div>
                             <div class="text-end text-muted">
@@ -79,8 +79,7 @@
                                     max="500"
                                     value="120"
                                     id="commentSize"
-                                    oninput="commentSizeValue.innerText = this.value"
-                                    id="commentSize"
+                                    oninput="commentSizeValue.innerText = this.value; localStorage.setItem('commentSize', this.value)"
                                 >
                             </div>
                             <div class="text-end text-muted">
