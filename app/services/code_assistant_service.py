@@ -89,7 +89,7 @@ class CodeAssistantService:
 
         return await self.ollama_service.chat(system_prompt, user_prompt)
 
-    async def compress_code(self, code: str) -> str:
+    async def compress_code(self, code: str, compression_level: str) -> str:
         system_prompt = (
             "Tu es CodeScribe, un assistant qui optimise le code. "
             "Tu réduis le nombre de lignes sans changer le comportement."
@@ -104,9 +104,16 @@ class CodeAssistantService:
             4. Retourne uniquement le code optimisé.
             5. N'utilise jamais de markdown.
 
+            Niveau de compression demandé (1=léger, 2=modéré, 3=fort) :
+            {compression_level}
+
             Code :
             {code}
         """
+
+        # Pour debug. Contrôle si prompt tient compte des settings du frontend.
+        print("Prompt envoyé à Ollama :")
+        print(user_prompt)
 
         response = await self.ollama_service.chat(system_prompt, user_prompt)
         return self._clean_code_response(response)

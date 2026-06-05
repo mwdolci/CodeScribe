@@ -32,7 +32,8 @@ async def control_code(payload: CodeRequest):
 @router.post("/compress", response_model=CodeResponse)
 async def compress_code(payload: CodeRequest):
     result = await get_code_assistant_service().compress_code(
-        payload.code
+        payload.code,
+        payload.compression_level
     )
 
     return CodeResponse(action="compress", result=result)

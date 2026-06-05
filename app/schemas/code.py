@@ -10,6 +10,8 @@ class CodeRequest(BaseModel):
     comment_level: str = "normal"
     max_comment_length: int = 120
 
+    compression_level: str = "2"
+
 
 # Schéma pour la réponse du code, incluant l'action effectuée et le résultat de l'exécution du code.
 class CodeResponse(BaseModel):

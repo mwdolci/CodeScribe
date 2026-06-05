@@ -14,7 +14,8 @@ async function callCodeScribe(endpoint) {
             body: JSON.stringify({
                 code: input.value,
                 comment_level: localStorage.getItem("commentLevel") || "2",
-                max_comment_length: parseInt(localStorage.getItem("commentSize"), 10)
+                max_comment_length: parseInt(localStorage.getItem("commentSize"), 10),
+                compression_level: localStorage.getItem("compressionLevel") || "2"
             })
         });
 
