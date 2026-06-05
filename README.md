@@ -72,7 +72,8 @@ CodeScribe/
 ├── Dockerfile
 ├── compose.yaml
 ├── requirements.txt
-└── README.md
+├── README.md
+└── LICENSE
 ```
 
 ---
