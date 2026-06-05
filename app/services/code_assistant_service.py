@@ -1,14 +1,46 @@
+import re
+
 from app.services.ollama_service import OllamaService
 
 class CodeAssistantService:
     def __init__(self, ollama_service: OllamaService):
         self.ollama_service = ollama_service
 
+    # Méthode utilitaire pour nettoyer les réponses de l'API Ollama
+    def _clean_code_response(self, response: str) -> str:
+        response = response.strip()
+
+        # Si la réponse contient un bloc Markdown ```python ... ```
+        match = re.search(r"```(?:\w+)?\s*\n?(.*?)```", response, re.DOTALL)
+        if match:
+            return match.group(1).strip()
+
+        # Sinon, supprime les éventuels délimiteurs restants
+        response = re.sub(r"^```(?:\w+)?\s*\n?", "", response)
+        response = re.sub(r"\n?```$", "", response)
+
+        return response.strip()
+
     async def comment_code(self, code: str, language: str) -> str:
-        system_prompt = (
-            "Tu es CodeScribe, un assistant IA spécialisé en programmation. "
-            "Tu expliques le code clairement en français."
-        )
+        system_prompt = """
+            Tu es CodeScribe, un assistant expert en programmation.
+
+            RÈGLES OBLIGATOIRES :
+
+            - Retourne uniquement le code final.
+            - Ne fournis aucune explication avant le code.
+            - Ne fournis aucune explication après le code.
+            - Ne fournis aucun résumé.
+            - N'utilise jamais les balises Markdown.
+            - N'utilise jamais les délimiteurs ``` .
+            - Le résultat doit être directement copiable dans un éditeur de code.
+            - Conserve exactement le langage d'origine.
+            - Ajoute uniquement des commentaires pertinents dans le code.
+            - Les commentaires doivent être en français.
+            - Ne modifie pas la logique du programme sauf si nécessaire pour ajouter les commentaires.
+
+            Ta réponse doit contenir exclusivement du code commenté.
+        """
 
         user_prompt = f"""
         Langage : {language}
@@ -20,7 +52,9 @@ class CodeAssistantService:
         {code}
         """
 
-        return await self.ollama_service.chat(system_prompt, user_prompt) # Appel à l'API Ollama pour obtenir la réponse (await nécessaire pour les appels asynchrones)
+        # Appel à l'API Ollama pour obtenir la réponse (await nécessaire pour les appels asynchrones)
+        response = await self.ollama_service.chat(system_prompt, user_prompt)
+        return self._clean_code_response(response)
 
     async def control_code(self, code: str, language: str) -> str:
         system_prompt = (
@@ -60,4 +94,5 @@ class CodeAssistantService:
         {code}
         """
 
-        return await self.ollama_service.chat(system_prompt, user_prompt)
+        response = await self.ollama_service.chat(system_prompt, user_prompt)
+        return self._clean_code_response(response)
