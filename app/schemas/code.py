@@ -10,6 +10,11 @@ class CodeRequest(BaseModel):
     comment_level: str = "normal"
     max_comment_length: int = 120
 
+    check_syntax: bool = True
+    check_performance: bool = True
+    check_security: bool = True
+    check_best_practices: bool = True
+
     compression_level: str = "2"
 
 

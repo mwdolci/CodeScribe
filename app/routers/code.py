@@ -23,7 +23,11 @@ async def comment_code(payload: CodeRequest):
 @router.post("/control", response_model=CodeResponse)
 async def control_code(payload: CodeRequest):
     result = await get_code_assistant_service().control_code(
-        payload.code
+        payload.code,
+        payload.check_syntax,
+        payload.check_performance,
+        payload.check_security,
+        payload.check_best_practices
     )
 
     return CodeResponse(action="control", result=result)

@@ -69,23 +69,39 @@ class CodeAssistantService:
         response = await self.ollama_service.chat(system_prompt, user_prompt)
         return self._clean_code_response(response)
 
-    async def control_code(self, code: str) -> str:
+    async def control_code(self, code: str, check_syntax: bool, check_performance: bool, check_security: bool, check_best_practices: bool) -> str:
         system_prompt = (
             "Tu es CodeScribe, un expert en revue de code. "
             "Tu détectes les erreurs et proposes des corrections."
         )
 
+        checks = []
+        if check_syntax:
+            checks.append("- Vérifie la syntaxe et la logique.")
+        if check_performance:
+            checks.append("- Vérifie les problèmes de performance.")
+        if check_security:
+            checks.append("- Vérifie les failles de sécurité.")
+        if check_best_practices:
+            checks.append("- Vérifie les bonnes pratiques.")
+
+        checks_text = "\n".join(checks) or "- Aucun contrôle spécifique sélectionné."
+
         user_prompt = f"""
             Analyse le code suivant.
 
             1. Détecte automatiquement le langage.
-            2. Vérifie la syntaxe et la logique.
-            3. Signale les erreurs éventuelles.
+            2. Contrôles demandés :
+            {checks_text}
             4. Propose une correction si nécessaire.
 
             Code :
             {code}
         """
+
+        # Pour debug. Contrôle si prompt tient compte des settings du frontend.
+        print("Prompt envoyé à Ollama :")
+        print(user_prompt)
 
         return await self.ollama_service.chat(system_prompt, user_prompt)
 

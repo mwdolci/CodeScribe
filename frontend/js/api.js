@@ -15,6 +15,10 @@ async function callCodeScribe(endpoint) {
                 code: input.value,
                 comment_level: localStorage.getItem("commentLevel") || "2",
                 max_comment_length: parseInt(localStorage.getItem("commentSize"), 10),
+                check_syntax: localStorage.getItem("checkSyntax") !== "false",
+                check_performance: localStorage.getItem("checkPerformance") !== "false",
+                check_security: localStorage.getItem("checkSecurity") !== "false",
+                check_best_practices: localStorage.getItem("checkBestPractices") !== "false",
                 compression_level: localStorage.getItem("compressionLevel") || "2"
             })
         });
