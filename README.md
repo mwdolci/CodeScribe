@@ -202,9 +202,9 @@ CodeScribe/
 ### Backend
 
 * Python 3.11
-* FastAPI
-* Pydantic
-* HTTPX
+* FastAPI (API REST et documentation Swagger)
+* Pydantic (validation des données)
+* HTTPX (communication avec Ollama)
 
 ### Intelligence Artificielle
 
