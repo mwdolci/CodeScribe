@@ -35,3 +35,23 @@ async function callCodeScribe(endpoint) {
         output.value = "Erreur de connexion avec le backend.";
     }
 }
+
+async function copyResult() {
+    const output = document.getElementById("result-output");
+    const text = output.value; // Récupère le texte du résultat à copier
+
+    // Vérifie si le texte n'est pas vide ou ne contient que des espaces
+    if (!text.trim()) {
+        alert("Aucun résultat à copier.");
+        return;
+    }
+
+    await navigator.clipboard.writeText(text); // Copie le texte dans le presse-papiers
+
+    const copyBtn = document.getElementById("copy-btn");
+    copyBtn.innerHTML = 'Copié <i class="bi bi-check2"></i>'; // Change le texte du bouton pour indiquer que c'est copié
+
+    setTimeout(() => {
+        copyBtn.innerHTML = 'Copier <i class="bi bi-copy"></i>'; // Remet le texte du bouton à la normale après 1.5 secondes
+    }, 1500);
+}

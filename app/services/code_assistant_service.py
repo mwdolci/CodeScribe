@@ -25,6 +25,15 @@ class CodeAssistantService:
         system_prompt = """
             Tu es CodeScribe, un assistant expert en programmation.
 
+            AVANT toute analyse :
+            - Vérifie que l'entrée ressemble réellement à du code informatique.
+            - Si l'entrée ne ressemble pas à du code source, réponds uniquement :
+
+            Erreur : l'entrée ne ressemble pas à du code informatique.
+
+            - N'ajoute aucune explication supplémentaire.
+            - N'essaie jamais de transformer du texte ordinaire en code.
+
             RÈGLES OBLIGATOIRES :
 
             - Retourne uniquement le code final.
@@ -70,10 +79,21 @@ class CodeAssistantService:
         return self._clean_code_response(response)
 
     async def control_code(self, code: str, check_syntax: bool, check_performance: bool, check_security: bool, check_best_practices: bool) -> str:
-        system_prompt = (
-            "Tu es CodeScribe, un expert en revue de code. "
-            "Tu détectes les erreurs et proposes des corrections."
-        )
+        system_prompt = """
+            Tu es CodeScribe, un expert en revue de code. 
+
+            AVANT toute analyse :
+
+            - Vérifie que l'entrée ressemble réellement à du code informatique.
+            - Si l'entrée ne ressemble pas à du code source, réponds uniquement :
+
+            Erreur : l'entrée ne ressemble pas à du code informatique.
+
+            - N'ajoute aucune explication supplémentaire.
+            - N'essaie jamais de transformer du texte ordinaire en code.
+
+            Tu détectes les erreurs et proposes des corrections.
+        """
 
         checks = []
         if check_syntax:
@@ -106,10 +126,21 @@ class CodeAssistantService:
         return await self.ollama_service.chat(system_prompt, user_prompt)
 
     async def compress_code(self, code: str, compression_level: str) -> str:
-        system_prompt = (
-            "Tu es CodeScribe, un assistant qui optimise le code. "
-            "Tu réduis le nombre de lignes sans changer le comportement."
-        )
+        system_prompt = """
+            Tu es CodeScribe, un assistant qui optimise le code.
+
+            AVANT toute analyse :
+
+            - Vérifie que l'entrée ressemble réellement à du code informatique.
+            - Si l'entrée ne ressemble pas à du code source, réponds uniquement :
+
+            Erreur : l'entrée ne ressemble pas à du code informatique.
+
+            - N'ajoute aucune explication supplémentaire.
+            - N'essaie jamais de transformer du texte ordinaire en code.
+
+            Tu réduis le nombre de lignes sans changer le comportement.
+        """
 
         user_prompt = f"""
             Analyse le code suivant.
