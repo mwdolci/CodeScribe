@@ -3,6 +3,8 @@ from fastapi import APIRouter, HTTPException, status
 from app.core.dependencies import get_code_assistant_service
 from app.schemas.code import CodeRequest, CodeResponse
 
+from app.services.history_service import HistoryService
+
 router = APIRouter(prefix="/api", tags=["CodeScribe"])
 
 
@@ -17,6 +19,7 @@ async def comment_code(payload: CodeRequest):
         payload.max_comment_length
     )
 
+    HistoryService().add_entry("comment", payload.code, result)
     return CodeResponse(action="comment", result=result)
 
 
@@ -30,6 +33,7 @@ async def control_code(payload: CodeRequest):
         payload.check_best_practices
     )
 
+    HistoryService().add_entry("control", payload.code, result)
     return CodeResponse(action="control", result=result)
 
 
@@ -40,4 +44,9 @@ async def compress_code(payload: CodeRequest):
         payload.compression_level
     )
 
+    HistoryService().add_entry("compress", payload.code, result)
     return CodeResponse(action="compress", result=result)
+
+@router.get("/history")
+async def get_history():
+    return HistoryService().get_history()

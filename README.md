@@ -113,8 +113,11 @@ CodeScribe/
 │       ├── code_assistant_service.py
 │       │   └── Construction des prompts et logique métier.
 │       │
-│       └── ollama_service.py
-│           └── Communication avec Ollama et exécution des requêtes LLM.
+│       ├── ollama_service.py
+│       │    └── Communication avec Ollama et exécution des requêtes LLM.
+│       │
+│		└── history_service.py
+│            └── Mémorisation des conversations.
 │
 ├── frontend/
 │   │
@@ -352,6 +355,8 @@ L'application conserve un historique minimal des requêtes et réponses dans le 
 ```text
 data/history.json
 ```
+
+Il peut être consulter sous : http://localhost:8000/api/history
 
 ---
 

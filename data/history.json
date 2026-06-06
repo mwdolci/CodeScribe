@@ -1,5 +1,14 @@
 [
-  {
-    "id": 1
-  }
+    {
+        "date": "2026-06-06T07:34:04",
+        "action": "comment",
+        "input": "if (value >12) \n{\nvalue = 12;\n}",
+        "result": "// Détection du langage : le code est écrit en C, on utilise donc les structures conditionnelles.\n\n// Si la valeur est supérieure à 12, il faut la mettre à 12.\nif (value > 12) {\n    // La valeur est trop grande et doit être ajustée.\n    value = 12;\n}"
+    },
+    {
+        "date": "2026-06-06T07:37:57",
+        "action": "compress",
+        "input": "function maFonction($parametre1, $parametre2) {\n\n    $resultat = $parametre1 + $parametre2;\n    \n    return $resultat; // Retourne le résultat\n}\n\n\necho maFonction(5, 10); // Affiche 15",
+        "result": "function maFonction($parametre1, $parametre2) {\n    return $parametre1 + $parametre2;\n}"
+    }
 ]
