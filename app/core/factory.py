@@ -19,7 +19,7 @@ def create_app() -> FastAPI:
         title=settings.app_name,
         debug=settings.debug,
         version="1.0.0",
-        description="API FastAPI + Ollama pour le workshop FAQ locale",
+        description="API FastAPI + Ollama pour CodeScribe",
         openapi_tags=tags_metadata,
         swagger_ui_parameters={"displayRequestDuration": True, "defaultModelsExpandDepth": -1},
     )
