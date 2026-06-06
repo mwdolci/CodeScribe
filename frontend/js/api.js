@@ -2,7 +2,7 @@ async function callCodeScribe(endpoint) {
     const input = document.getElementById("code-input");
     const output = document.getElementById("result-output");
 
-    output.value = "Chargement...";
+    output.value = "Traitement en cours...";
 
     try {
         console.log("commentSize envoyé =", localStorage.getItem("commentSize"));
