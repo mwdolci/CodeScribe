@@ -83,6 +83,7 @@ CodeScribe/
 ├── compose.yaml
 ├── requirements.txt
 ├── README.md
+├── QuickStart.mp4
 └── LICENSE
 ```
 
@@ -182,6 +183,9 @@ CodeScribe/
 │
 ├── README.md
 │   └── Documentation du projet.
+│
+├── QuickStart.mp4
+│   └── Démonstartion du projet.
 │
 ├── LICENSE
 │   └── Licence du projet.
