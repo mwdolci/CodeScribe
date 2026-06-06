@@ -10,5 +10,11 @@
         "action": "compress",
         "input": "function maFonction($parametre1, $parametre2) {\n\n    $resultat = $parametre1 + $parametre2;\n    \n    return $resultat; // Retourne le résultat\n}\n\n\necho maFonction(5, 10); // Affiche 15",
         "result": "function maFonction($parametre1, $parametre2) {\n    return $parametre1 + $parametre2;\n}"
+    },
+    {
+        "date": "2026-06-06T07:57:48",
+        "action": "control",
+        "input": "if (value >12) \n{\nvalue = 12;\n}",
+        "result": "**Analyse du code**\n\nLe langage détecté est le langage C# ou C++, mais sans certitude, il est impossible de déterminer avec précision.\n\n**Contrôle 1 : Syntaxe et logique**\n\nLe code semble correctement syntaxé. Toutefois, la logique est suspecte. La condition `value > 12` vérifie si la valeur est supérieure à 12, mais si elle l'est, elle réduit la valeur à 12. Cela semble une mauvaise pratique et pourrait être vu comme une forme de \"capteur de valeurs\" pour empêcher les valeurs supérieures à 12.\n\n**Contrôle 2 : Failles de sécurité**\n\nAucune faille de sécurité n'est détectée dans ce code.\n\n**Contrôle 3 : Bonnes pratiques**\n\nIl y a quelques bonnes pratiques:\n\n* Le code est concise et efficace.\n* Il utilise une condition pour vérifier la valeur, ce qui est une bonne pratique.\n\nCependant, comme mentionné précédemment, il semble que la logique soit suspecte et pourrait être améliorée.\n\n**Proposition de correction**\n\nPour améliorer la logique et rendre le code plus flexible, on pourrait utiliser une condition `if` avec une valeur définie comme valeur limite. Voici un exemple de modification du code :\n```csharp\nint limite = 12;\nif (value > limite) {\n    value = limite;\n} else if (value < 0) {\n    value = 0; // ajouter une valeur de base pour éviter les valeurs négatives\n}\n```\nCette modification permettrait de définir la valeur limite séparément et d'ajuster le comportement en fonction des besoins."
     }
 ]

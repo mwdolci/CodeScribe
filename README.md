@@ -1,12 +1,12 @@
 # CodeScribe
 
-## Description
+## ℹ️ Description
 
 CodeScribe est une application web développée avec **FastAPI** et **Ollama** permettant d'analyser du code source à l'aide d'un modèle d'intelligence artificielle générative.
 
 L'utilisateur peut coller ou écrire du code dans une interface web puis demander à l'IA de :
 
-* commenter le code ligne par ligne ;
+* commente automatiquement le code ;
 * vérifier la qualité et la validité du code ;
 * proposer une version optimisée et plus concise du code.
 
@@ -14,11 +14,11 @@ Le projet a été réalisé dans le cadre de la formation **MAS-RAD**.
 
 ---
 
-## Auteur
+## 👤 Auteur
 
 Marco Dolci
 
-## Fonctionnalités
+## ✨ Fonctionnalités
 
 ### Commenter du code
 
@@ -44,9 +44,19 @@ L'API expose automatiquement une documentation Swagger accessible via :
 http://localhost:8000/docs
 ```
 
+### Paramètres personnalisables
+
+Via la page settigns l'utilisateur peut configurer :
+
+* le thème de l'application ;
+* le niveau de détail des commentaires ;
+* la longueur maximale des commentaires ;
+* le niveau de compression du code ;
+* les contrôles à effectuer lors de l'analyse.
+
 ---
 
-## Architecture du projet
+## 🏗️ Architecture du projet
 
 ```text
 CodeScribe/
@@ -78,7 +88,7 @@ CodeScribe/
 
 ---
 
-## Architecture du projet avec détails
+## 📂 Structure détaillée du projet
 
 ```text
 CodeScribe/
@@ -117,7 +127,7 @@ CodeScribe/
 │       │    └── Communication avec Ollama et exécution des requêtes LLM.
 │       │
 │		└── history_service.py
-│            └── Mémorisation des conversations.
+│            └── Gestion et stockage de l'historique des opérations.
 │
 ├── frontend/
 │   │
@@ -165,7 +175,7 @@ CodeScribe/
 │   └── Construction de l'image Docker du backend.
 │
 ├── compose.yaml
-│   └── Orchestration des conteneurs Docker (API et Ollama).
+│   └── Orchestration des conteneurs Docker.
 │
 ├── requirements.txt
 │   └── Liste des dépendances Python du projet.
@@ -187,7 +197,7 @@ CodeScribe/
 ```
 
 
-## Technologies utilisées
+## 🛠️ Technologies utilisées
 
 ### Backend
 
@@ -214,7 +224,7 @@ CodeScribe/
 
 ---
 
-## Installation
+## ⚙️ Installation
 
 ### Prérequis
 
@@ -231,7 +241,7 @@ ollama pull llama3.2
 
 ---
 
-## Lancement du projet
+## 🚀 Lancement du projet
 
 Depuis la racine du projet :
 
@@ -247,7 +257,7 @@ Application :
 http://localhost:8000
 ```
 
-Documentation Swagger :
+Documentation interactive Swagger :
 
 ```text
 http://localhost:8000/docs
@@ -255,7 +265,7 @@ http://localhost:8000/docs
 
 ---
 
-## Endpoints disponibles
+## 🌐 Endpoints disponibles
 
 ### Vérification de l'état de l'application
 
@@ -282,9 +292,10 @@ POST /api/comment
 Exemple :
 
 ```json
-{
-  "code": "def add(a,b):\n    return a+b",
-  "language": "python"
+{ 
+	"code": "def add(a, b):\n return a + b", 
+	"comment_level": "2", 
+	"max_comment_length": 20 
 }
 ```
 
@@ -299,9 +310,12 @@ POST /api/control
 Exemple :
 
 ```json
-{
-  "code": "print(test)",
-  "language": "python"
+{ 
+	"code": "print(test)", 
+	"check_syntax": true, 
+	"check_performance": true, 
+	"check_security": true, 
+	"check_best_practices": true 
 }
 ```
 
@@ -316,15 +330,34 @@ POST /api/compress
 Exemple :
 
 ```json
-{
-  "code": "x = 1\ny = 2\nprint(x + y)",
-  "language": "python"
+{ 
+	"code": "x = 1\ny = 2\nprint(x + y)", 
+	"compression_level": "2" 
 }
 ```
 
 ---
 
-## Gestion des erreurs
+### Consulter l'historique
+
+```http
+GET /api/history
+```
+
+Réponse :
+
+```json
+[
+  {
+    "date": "2025-06-06T14:30:00",
+    "action": "comment",
+    "input": "...",
+    "result": "..."
+  }
+]
+```
+
+## ⚠️ Gestion des erreurs
 
 L'application gère :
 
@@ -336,7 +369,7 @@ L'application gère :
 
 ---
 
-## Prompt Engineering
+## 🧠 Prompt Engineering
 
 Le projet utilise des prompts spécialisés selon l'action demandée :
 
@@ -348,7 +381,7 @@ Chaque fonctionnalité possède son propre contexte système afin d'obtenir des 
 
 ---
 
-## Historique
+## 🕘 Historique
 
 L'application conserve un historique minimal des requêtes et réponses dans le fichier :
 
@@ -356,9 +389,14 @@ L'application conserve un historique minimal des requêtes et réponses dans le 
 data/history.json
 ```
 
-Il peut être consulter sous : http://localhost:8000/api/history
+Il peut être consulté à l'adresse : http://localhost:8000/api/history
 
 ---
 
+## 💡 Evolutions envisagées
+
+* ajout d'une page 'conversion' premettant de traduire du code dans un autre langage de programmation
+* ajout dans les settings le réglage de la température pour plus ou moins de créativité dans les réponses du LLM
+* ajout dans les settings la possibilité de sélectionner un autre modèle que llama3.2
 
 
