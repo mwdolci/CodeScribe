@@ -403,7 +403,7 @@ Les fonctionnalités du projet ont été testées manuellement via l'interface w
 
 Une démonstration vidéo est disponible ici :
 
-[Voir la démonstration Quickstart](./Quickstart.mp4)
+[Voir la démonstration Quickstart](Quickstart.mp4)
 
 La vidéo montre notamment :
 - le lancement du projet ;
