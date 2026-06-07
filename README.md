@@ -397,6 +397,23 @@ Il peut être consulté à l'adresse : http://localhost:8000/api/history
 
 ---
 
+## 🧪 Tests et démonstration
+
+Les fonctionnalités du projet ont été testées manuellement via l'interface web.
+
+Une démonstration vidéo est disponible ici :
+
+[Voir la démonstration Quickstart](./Quickstart.mp4)
+
+La vidéo montre notamment :
+- le lancement du projet ;
+- l'utilisation de l'interface web ;
+- l'appel aux endpoints FastAPI ;
+- la génération de réponses avec Ollama ;
+- l'enregistrement de l'historique.
+
+---
+
 ## 💡 Evolutions envisagées
 
 * ajout d'une page 'conversion' premettant de traduire du code dans un autre langage de programmation
