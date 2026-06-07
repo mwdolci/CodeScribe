@@ -401,9 +401,7 @@ Il peut être consulté à l'adresse : http://localhost:8000/api/history
 
 Les fonctionnalités du projet ont été testées manuellement via l'interface web.
 
-Une démonstration vidéo est disponible ici :
-
-[Voir la démonstration Quickstart](Quickstart.mp4)
+Une démonstration vidéo est disponible dans le fichier 'Quickstart.mp4' du présent projet.
 
 La vidéo montre notamment :
 - le lancement du projet ;
